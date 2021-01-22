@@ -1,0 +1,7 @@
+yarn add typescript eslint -D
+yarn eslint --init (v < 6) (usar arquivo .eslint.js)
+
+ctrl+shift+p (open settings(json)
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },)
