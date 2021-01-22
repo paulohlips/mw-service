@@ -1,7 +1,8 @@
 import { createSecureContext } from 'tls';
-import { getRepository } from 'typeorm';
+import { getRepository, getCustomRepository } from 'typeorm';
 
 import Course from '../entities/Course';
+import CoursesRepository from '../repositories/CoursesRepository';
 
 interface Request {
   name: string;
@@ -14,8 +15,9 @@ class CreateCourseService {
     department,
   }: Request): Promise<Course> | string {
     const createCourseService = getRepository(Course);
+    const coursesRepository = getCustomRepository(CoursesRepository);
 
-    const courseExists = await createCourseService.findOne({ name });
+    const courseExists = await coursesRepository.checkCourseExistense(name);
 
     console.log(courseExists);
 
