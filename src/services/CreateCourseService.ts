@@ -17,7 +17,7 @@ class CreateCourseService {
     const createCourseService = getRepository(Course);
     const coursesRepository = getCustomRepository(CoursesRepository);
 
-    const courseExists = await coursesRepository.checkCourseExistense(name);
+    const courseExists = await coursesRepository.checkCourseExistence(name);
 
     console.log(courseExists);
 
