@@ -1,3 +1,6 @@
+const { settings } = require("cluster");
+const { off } = require("process");
+
 module.exports = {
   env: {
     es2021: true,
@@ -18,6 +21,7 @@ module.exports = {
   plugins: ["@typescript-eslint", "prettier"],
   rules: {
     "prettier/prettier": "error",
+    "import/no-unresolved": "off",
     "no-useless-constructor": "off",
     "no-unused-vars": "off",
     "camelcase": "off",

@@ -1,8 +1,8 @@
 import Router, { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import Course from '../entities/Course';
+import Course from '@modules/Courses/infra/typeorm/entities/Course';
 
-import CreateCourseService from '../services/CreateCourseService';
+import CreateCourseService from '@modules/Courses/services/CreateCourseService';
 
 const coursesRoutes = Router();
 

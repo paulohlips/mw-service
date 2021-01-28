@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { getRepository } from 'typeorm';
-import DisciplineService from '../services/CreateDisciplineService';
-import Discipline from '../entities/Discipline';
+import DisciplineService from '@modules/Disciplines/services/CreateDisciplineService';
+import Discipline from '@modules/Disciplines/infra/typeorm/entities/Discipline';
 
 const disciplineRoutes = Router();
 

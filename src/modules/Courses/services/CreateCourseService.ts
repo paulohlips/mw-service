@@ -1,7 +1,7 @@
 import { getRepository, getCustomRepository } from 'typeorm';
 
-import Course from '../entities/Course';
-import CoursesRepository from '../repositories/CoursesRepository';
+import Course from '@modules/Courses/infra/typeorm/entities/Course';
+import CoursesRepository from '@modules/Courses/infra/typeorm/repositories/CoursesRepository';
 
 interface Request {
   name: string;

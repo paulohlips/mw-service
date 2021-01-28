@@ -1,7 +1,7 @@
 import { getRepository, EntityRepository } from 'typeorm';
-import Course from '../entities/Course';
+import Course from '@modules/Courses/infra/typeorm/entities/Course';
 
-@EntityRepository('courses')
+@EntityRepository(Course)
 class CoursesRepository {
   public async checkCourseExistence(name: string): Promise<Course | undefined> {
     const coursesRepository = getRepository(Course);

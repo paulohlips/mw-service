@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm';
-import Discipline from '../entities/Discipline';
+import Discipline from '@modules/Disciplines/infra/typeorm/entities/Discipline';
 
 interface Request {
   name: string;

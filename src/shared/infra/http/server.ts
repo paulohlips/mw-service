@@ -1,7 +1,7 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 
-import routes from './routes';
-import './database';
+import routes from '@shared/infra/http/routes';
+import '@shared/infra/typeorm';
 
 const server = express();
 
