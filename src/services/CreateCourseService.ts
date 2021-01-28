@@ -1,4 +1,3 @@
-import { createSecureContext } from 'tls';
 import { getRepository, getCustomRepository } from 'typeorm';
 
 import Course from '../entities/Course';
@@ -13,13 +12,11 @@ class CreateCourseService {
   public async execute({
     name,
     department,
-  }: Request): Promise<Course> | string {
+  }: Request): Promise<Course | string> {
     const createCourseService = getRepository(Course);
     const coursesRepository = getCustomRepository(CoursesRepository);
 
     const courseExists = await coursesRepository.checkCourseExistence(name);
-
-    console.log(courseExists);
 
     if (courseExists) {
       return `Course ${name} has been registered.`;
