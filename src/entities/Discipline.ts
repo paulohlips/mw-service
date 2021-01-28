@@ -22,7 +22,7 @@ class Discipline {
   hours: number;
 
   @ManyToOne(() => Course)
-  @JoinColumn({ name: 'provider_id' })
+  @JoinColumn({ name: 'course_id' })
   course: string;
 
   @CreateDateColumn()
