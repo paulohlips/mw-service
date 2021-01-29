@@ -2,6 +2,7 @@ import { injectable, inject } from 'tsyringe';
 
 import Course from '@modules/Courses/infra/typeorm/entities/Course';
 import ICourseRepository from '@modules/Courses/repositories/ICourseRepository';
+import AppError from '@shared/errors/AppError';
 
 interface IRequest {
   name: string;
@@ -18,11 +19,15 @@ class CreateCourseService {
   public async execute({
     name,
     department,
-  }: IRequest): Promise<Course | string> {
+  }: IRequest): Promise<Course | unknown> {
+    if (!name || !department) {
+      throw new AppError(`Name and department are required.`, 422);
+    }
+
     const courseExists = await this.courseRepository.checkCourseExistence(name);
 
     if (courseExists) {
-      return `Course ${name} has been registered.`;
+      throw new AppError(`Course ${name} has been registered.`, 412);
     }
 
     const course = this.courseRepository.create({ name, department });

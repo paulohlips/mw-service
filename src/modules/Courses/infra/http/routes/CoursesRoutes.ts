@@ -1,27 +1,15 @@
-import Router, { Request, Response } from 'express';
-import { container } from 'tsyringe';
+import Router from 'express';
 
-import CreateCourseService from '@modules/Courses/services/CreateCourseService';
-import ListCourseService from '@modules/Courses/services/ListCoursesService';
+import CoursesController from '@modules/Courses/infra/http/controllers/ListCoursesController';
 
 const coursesRoutes = Router();
 
-coursesRoutes.get('/', async (_request, response) => {
-  const listCoursesRepository = container.resolve(ListCourseService);
-  const courses = await listCoursesRepository.execute();
+coursesRoutes.get('/', CoursesController.index);
 
-  return response.json(courses);
-});
+coursesRoutes.post('/', CoursesController.create);
 
-// yr
+coursesRoutes.put('/', CoursesController.update);
 
-coursesRoutes.post('/', async (request: Request, response: Response) => {
-  const { name, department } = request.body;
-  const createCourseRepository = container.resolve(CreateCourseService);
-
-  const res = await createCourseRepository.execute({ name, department });
-
-  return response.json({ res });
-});
+coursesRoutes.delete('/', CoursesController.delete);
 
 export default coursesRoutes;
