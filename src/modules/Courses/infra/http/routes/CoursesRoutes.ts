@@ -13,6 +13,8 @@ coursesRoutes.get('/', async (_request, response) => {
   return response.json(courses);
 });
 
+// yr
+
 coursesRoutes.post('/', async (request: Request, response: Response) => {
   const { name, department } = request.body;
   const createCourseRepository = container.resolve(CreateCourseService);
