@@ -38,6 +38,14 @@ module.exports = {
       {
         "ts": "never"
       }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "prefix": ["I"],
+        "format": ["PascalCase"]
+      }
     ]
   }
 };

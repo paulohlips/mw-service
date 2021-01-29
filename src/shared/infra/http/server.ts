@@ -1,7 +1,9 @@
 import express from 'express';
+import 'reflect-metadata';
 
 import routes from '@shared/infra/http/routes';
 import '@shared/infra/typeorm';
+import '@shared/container';
 
 const server = express();
 

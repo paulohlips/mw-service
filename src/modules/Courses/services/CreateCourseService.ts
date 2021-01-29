@@ -1,30 +1,31 @@
-import { getRepository, getCustomRepository } from 'typeorm';
+import { injectable, inject } from 'tsyringe';
 
 import Course from '@modules/Courses/infra/typeorm/entities/Course';
-import CoursesRepository from '@modules/Courses/infra/typeorm/repositories/CoursesRepository';
+import ICourseRepository from '@modules/Courses/repositories/ICourseRepository';
 
-interface Request {
+interface IRequest {
   name: string;
   department: string;
 }
 
+@injectable()
 class CreateCourseService {
+  constructor(
+    @inject('CourseRepository')
+    private courseRepository: ICourseRepository,
+  ) {}
+
   public async execute({
     name,
     department,
-  }: Request): Promise<Course | string> {
-    const createCourseService = getRepository(Course);
-    const coursesRepository = getCustomRepository(CoursesRepository);
-
-    const courseExists = await coursesRepository.checkCourseExistence(name);
+  }: IRequest): Promise<Course | string> {
+    const courseExists = await this.courseRepository.checkCourseExistence(name);
 
     if (courseExists) {
       return `Course ${name} has been registered.`;
     }
 
-    const course = createCourseService.create({ name, department });
-
-    await createCourseService.save(course);
+    const course = this.courseRepository.create({ name, department });
 
     return course;
   }

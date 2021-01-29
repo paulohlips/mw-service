@@ -1,22 +1,21 @@
 import Router, { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
-import Course from '@modules/Courses/infra/typeorm/entities/Course';
+import { container } from 'tsyringe';
 
 import CreateCourseService from '@modules/Courses/services/CreateCourseService';
+import ListCourseService from '@modules/Courses/services/ListCoursesService';
 
 const coursesRoutes = Router();
 
 coursesRoutes.get('/', async (_request, response) => {
-  const createCourseRepository = getRepository(Course);
-
-  const courses = await createCourseRepository.find();
+  const listCoursesRepository = container.resolve(ListCourseService);
+  const courses = await listCoursesRepository.execute();
 
   return response.json(courses);
 });
 
 coursesRoutes.post('/', async (request: Request, response: Response) => {
   const { name, department } = request.body;
-  const createCourseRepository = new CreateCourseService();
+  const createCourseRepository = container.resolve(CreateCourseService);
 
   const res = await createCourseRepository.execute({ name, department });
 
