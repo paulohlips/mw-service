@@ -1,19 +1,30 @@
-import { getRepository } from 'typeorm';
+import { injectable, inject } from 'tsyringe';
 import Discipline from '@modules/Disciplines/infra/typeorm/entities/Discipline';
+import IDisciplineRepository from '@modules/Disciplines/repositories/IDisciplineRepository';
 
-interface Request {
+interface IRequest {
   name: string;
   hours: number;
   course: string;
 }
 
+@injectable()
 class CreateDisciplineService {
-  public async execute({ course, hours, name }: Request) {
-    const createDisciplineService = getRepository(Discipline);
+  constructor(
+    @inject('DisciplineRepository')
+    private disciplineRepository: IDisciplineRepository,
+  ) {}
 
-    const discipline = createDisciplineService.create({ course, hours, name });
-
-    await createDisciplineService.save(discipline);
+  public async execute({
+    course,
+    hours,
+    name,
+  }: IRequest): Promise<Discipline | undefined> {
+    const discipline = this.disciplineRepository.create({
+      course,
+      name,
+      hours,
+    });
 
     return discipline;
   }
