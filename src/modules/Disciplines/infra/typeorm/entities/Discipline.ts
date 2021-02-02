@@ -8,7 +8,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import Course from '@modules/Courses/infra/typeorm/entities/Course';
+// import Course from '@modules/Courses/infra/typeorm/entities/Course';
+import Course from '../../../../Courses/infra/typeorm/entities/Course';
 
 @Entity('disciplines')
 class Discipline {

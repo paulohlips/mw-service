@@ -13,8 +13,6 @@ class DisciplineRepository implements IDisciplineRepository {
   public async list(): Promise<Discipline[] | undefined> {
     const disciplines = await this.ormRepository.find();
 
-    console.log(disciplines);
-
     return disciplines;
   }
 
@@ -27,6 +25,17 @@ class DisciplineRepository implements IDisciplineRepository {
 
     await this.ormRepository.save(discipline);
     return discipline;
+  }
+
+  public async listByCourseId(
+    course_id: string,
+  ): Promise<Discipline[] | undefined> {
+    const id = course_id.toString();
+    const disciplines = await this.ormRepository.find({
+      where: { course_id: id },
+    });
+
+    return disciplines;
   }
 }
 
