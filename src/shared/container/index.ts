@@ -17,7 +17,4 @@ container.registerSingleton<IDisciplineRepository>(
   DisciplineRepository,
 );
 
-container.registerSingleton<IUserRepository>(
-  'DisciplineRepository',
-  UserRepository,
-);
+container.registerSingleton<IUserRepository>('UserRepository', UserRepository);

@@ -4,10 +4,10 @@ import User from '@modules/Users/infra/typeorm/entities/User';
 import IUserRepository from '@modules/Users/repositories/IUserRepository';
 
 class UserRepository implements IUserRepository {
-  private ormRespository: Repository<User>;
+  private ormRepository: Repository<User>;
 
   constructor() {
-    this.ormRespository = getRepository(User);
+    this.ormRepository = getRepository(User);
   }
 
   public async create({
@@ -15,11 +15,25 @@ class UserRepository implements IUserRepository {
     name,
     password,
   }: ICreateUserDTO): Promise<User> {
-    const user = this.ormRespository.create({ email, name, password });
+    const user = this.ormRepository.create({ email, name, password });
 
-    await this.ormRespository.save(user);
+    await this.ormRepository.save(user);
 
     return user;
+  }
+
+  public async findById(id: string): Promise<User | undefined> {
+    const findAppointment = await this.ormRepository.findOne(id);
+
+    return findAppointment;
+  }
+
+  public async findByEmail(email: string): Promise<User | undefined> {
+    const findAppointment = await this.ormRepository.findOne({
+      where: { email },
+    });
+
+    return findAppointment;
   }
 }
 

@@ -18,11 +18,11 @@ class CoursesRepository implements ICourseRepository {
   }
 
   public async create({ name, department }: ICreateCourseDTO): Promise<Course> {
-    const appointment = this.ormRepository.create({ name, department });
+    const course = this.ormRepository.create({ name, department });
 
-    await this.ormRepository.save(appointment);
+    await this.ormRepository.save(course);
 
-    return appointment;
+    return course;
   }
 
   public async list(): Promise<Course[]> {
